@@ -45,7 +45,7 @@ def run():
             st.markdown(f'<div class="feeling-box">💭 "{feeling}"</div>', unsafe_allow_html=True)
 
             if is_negative(feeling):
-                st.image("https://cdn-icons-png.flaticon.com/512/5117/5117343.png", width=100, caption="Toilet 🚽")
+                st.image("toilet.png", width=100, caption="Toilet 🚽")
                 if st.button("🚽 Flush it away!"):
                     st.session_state["flushed"] = True
             else:
