@@ -1,26 +1,42 @@
 import streamlit as st
-import time
 
 def run():
-    st.title("🫧 Bubble Smash: Let Go of Negativity")
+    st.title("🚽 Flush the Bad Feels")
 
-    # ✅ Load CSS directly
-    with open("bubble.css") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    st.write("Write down what's bothering you...")
 
-    if "smashed" not in st.session_state:
-        st.session_state["smashed"] = False
+    if "flushed" not in st.session_state:
+        st.session_state["flushed"] = False
 
-    if not st.session_state["smashed"]:
-        st.markdown('<div class="bubble" id="bubble">sadness</div>', unsafe_allow_html=True)
-        if st.button("💥 Smash the Bubble"):
-            st.session_state["smashed"] = True
-            st.experimental_rerun()
+    if not st.session_state["flushed"]:
+        feeling = st.text_input("Your negative feeling", key="input_feeling")
+
+        if feeling:
+            st.markdown(f"""
+                <div style='
+                    margin-top: 30px;
+                    padding: 15px;
+                    border-radius: 10px;
+                    background-color: #ffdddd;
+                    width: fit-content;
+                    font-size: 20px;
+                    border: 2px solid red;
+                '>
+                    💭 "{feeling}"
+                </div>
+                <br>
+                <img src='https://i.imgur.com/V7nH1gD.png' width='150'><br>
+                """, unsafe_allow_html=True)
+
+            if st.button("🚽 Flush it away!"):
+                st.session_state["flushed"] = True
+                st.experimental_rerun()
+
     else:
-        st.markdown('<div class="bubble drained">happy ness</div>', unsafe_allow_html=True)
-        st.markdown("### 🌈 It's okay to feel. You're doing great. Here's a little calm for you:")
-        st.image("assets/soothing.gif", width=300)
+        st.success("🌈 Your feeling has been flushed away. You're lighter now!")
         st.balloons()
-if __name__ == "__main__":
-    run()
-        
+        st.image("https://media.giphy.com/media/3o7aCTfyhYawdOXcFW/giphy.gif", width=300)
+        if st.button("😌 Start over"):
+            st.session_state["flushed"] = False
+            st.experimental_rerun()
+
