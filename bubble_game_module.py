@@ -39,10 +39,7 @@ def run():
             st.image("https://cdn-icons-png.flaticon.com/512/5117/5117343.png", width=100, caption="Toilet 🚽")
 
             if st.button("🚽 Flush it away!"):
-                st.session_state["flushed"] = True
-                # Don't rerun here to avoid error
-                # st.experimental_rerun()
-    
+                st.session_state["flushed"] = True  # Set to True only, no rerun
     else:
         st.success("🎉 Your feeling has been flushed away.")
         st.markdown(f"'{st.session_state['feeling']}' is gone. You're stronger now. 💪")
@@ -50,9 +47,8 @@ def run():
         st.balloons()
 
         if st.button("🔄 Start Again"):
+            # Clear state manually — NO rerun
             st.session_state["flushed"] = False
             st.session_state["feeling"] = ""
-            st.experimental_rerun()
 if __name__ == "__main__":
     run()
-
