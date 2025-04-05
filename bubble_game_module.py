@@ -25,32 +25,34 @@ def run():
     </style>
     """, unsafe_allow_html=True)
 
+    # Initialize session state variables safely
+    if "feeling" not in st.session_state:
+        st.session_state.feeling = ""
     if "flushed" not in st.session_state:
-        st.session_state["flushed"] = False
-        st.session_state["feeling"] = ""
+        st.session_state.flushed = False
 
-    if not st.session_state["flushed"]:
+    if not st.session_state.flushed:
         feeling = st.text_input("😞 Type what you're feeling:")
 
         if feeling:
-            st.session_state["feeling"] = feeling
+            st.session_state.feeling = feeling
             st.markdown(f'<div class="feeling-box">💭 "{feeling}"</div>', unsafe_allow_html=True)
-            
             st.image("https://cdn-icons-png.flaticon.com/512/5117/5117343.png", width=100, caption="Toilet 🚽")
 
-            if st.button("🚽 Flush it away!"):
-                st.session_state["flushed"] = True
+            flush = st.button("🚽 Flush it away!")
+            if flush:
+                st.session_state.flushed = True
+                # No rerun needed, we check the state on next reload
                 st.experimental_rerun()
     else:
         st.success("🎉 Your feeling has been flushed away.")
-        st.markdown(f"'{st.session_state['feeling']}' is gone. You're stronger now. 💪")
+        st.markdown(f"'{st.session_state.feeling}' is gone. You're stronger now. 💪")
         st.image("https://media.giphy.com/media/3o7aCTfyhYawdOXcFW/giphy.gif", width=300)
         st.balloons()
 
         if st.button("🔄 Start Again"):
-            # Clear everything and rerun the app cleanly
-            for key in st.session_state.keys():
-                del st.session_state[key]
+            st.session_state.flushed = False
+            st.session_state.feeling = ""
             st.experimental_rerun()
 if __name__ == "__main__":
     run()
