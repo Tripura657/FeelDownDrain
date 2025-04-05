@@ -55,7 +55,7 @@ def run():
     elif st.session_state["flushed"]:
         st.success("🎉 Your negative feeling has been flushed away.")
         st.markdown(f"'{st.session_state['feeling']}' is gone. You're stronger now. 💪")
-        st.image("toilet.png", width=300)
+        
         st.balloons()
         if st.button("🔄 Start Again"):
             st.session_state["flushed"] = False
@@ -64,7 +64,6 @@ def run():
     elif st.session_state["celebrated"]:
         st.success("🌟 Let's cherish this beautiful emotion!")
         st.markdown(f"You're feeling: '{st.session_state['feeling']}' — and that's amazing! 💖")
-        st.image("https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif", width=300)
         st.balloons()
         if st.button("🔄 Start Again"):
             st.session_state["celebrated"] = False
