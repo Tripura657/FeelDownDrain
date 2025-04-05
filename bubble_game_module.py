@@ -5,8 +5,8 @@ def run():
     st.title("🫧 Bubble Smash: Let Go of Negativity")
 
     # ✅ Load CSS directly
-    '''with open("bubble.css") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)'''
+    with open("bubble.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
     if "smashed" not in st.session_state:
         st.session_state["smashed"] = False
