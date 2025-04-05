@@ -53,3 +53,6 @@ def run():
             st.session_state["flushed"] = False
             st.session_state["feeling"] = ""
             st.experimental_rerun()
+if __name__ == "__main__":
+    run()
+
