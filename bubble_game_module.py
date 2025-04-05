@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 # Basic list of negative keywords (you can expand this)
 NEGATIVE_FEELINGS = ["sad", "angry", "anxious", "worried", "depressed", "lonely", "tired", "upset", "frustrated"]
@@ -6,6 +7,14 @@ NEGATIVE_FEELINGS = ["sad", "angry", "anxious", "worried", "depressed", "lonely"
 def is_negative(feeling: str) -> bool:
     feeling = feeling.lower()
     return any(word in feeling for word in NEGATIVE_FEELINGS)
+
+def play_flush_sound():
+    flush_sound_html = """
+        <audio autoplay>
+            <source src="https://www.soundjay.com/toilets/sounds/toilet-flush-1.mp3" type="audio/mpeg">
+        </audio>
+    """
+    components.html(flush_sound_html, height=0)
 
 def run():
     st.set_page_config(page_title="Flush Your Feelings 🚽")
@@ -47,6 +56,7 @@ def run():
             if is_negative(feeling):
                 st.image("toilet.png", width=300, caption="Toilet 🚽")
                 if st.button("🚽 Flush it away!"):
+                    play_flush_sound()  # 🔊 Play sound on click
                     st.session_state["flushed"] = True
             else:
                 if st.button("🎉 Celebrate this feeling!"):
@@ -55,7 +65,6 @@ def run():
     elif st.session_state["flushed"]:
         st.success("🎉 Your negative feeling has been flushed away.")
         st.markdown(f"'{st.session_state['feeling']}' is gone. You're stronger now. 💪")
-        
         st.balloons()
         if st.button("🔄 Start Again"):
             st.session_state["flushed"] = False
