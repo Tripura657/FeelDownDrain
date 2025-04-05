@@ -55,7 +55,7 @@ def run():
     elif st.session_state["flushed"]:
         st.success("🎉 Your negative feeling has been flushed away.")
         st.markdown(f"'{st.session_state['feeling']}' is gone. You're stronger now. 💪")
-        st.image("https://media.giphy.com/media/3o7aCTfyhYawdOXcFW/giphy.gif", width=300)
+        st.image("toilet.png", width=300)
         st.balloons()
         if st.button("🔄 Start Again"):
             st.session_state["flushed"] = False
