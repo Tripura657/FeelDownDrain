@@ -39,4 +39,7 @@ def run():
         if st.button("😌 Start over"):
             st.session_state["flushed"] = False
             st.experimental_rerun()
+if __name__ == "__main__":
+    run()
+
 
