@@ -11,7 +11,7 @@ def is_negative(feeling: str) -> bool:
 def play_flush_sound():
     flush_sound_html = """
         <audio autoplay>
-            <source src="https://www.soundjay.com/toilets/sounds/toilet-flush-1.mp3" type="audio/mpeg">
+            <source src="foley-toilet-flush-without-tank-refill-238004.mp3" type="audio/mpeg">
         </audio>
     """
     components.html(flush_sound_html, height=0)
