@@ -1,11 +1,8 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# List of negative feelings
-NEGATIVE_FEELINGS = [
-    "sad", "angry", "anxious", "worried", "depressed",
-    "lonely", "tired", "upset", "frustrated"
-]
+# Basic list of negative keywords (you can expand this)
+NEGATIVE_FEELINGS = ["sad", "angry", "anxious", "worried", "depressed", "lonely", "tired", "upset", "frustrated"]
 
 def is_negative(feeling: str) -> bool:
     feeling = feeling.lower()
@@ -14,7 +11,7 @@ def is_negative(feeling: str) -> bool:
 def play_flush_sound():
     flush_sound_html = """
         <audio autoplay>
-            <source src="https://www.soundjay.com/toilets/sounds/toilet-flush-1.mp3" type="audio/mpeg">
+            <source src="foley-toilet-flush-without-tank-refill-238004.mp3" type="audio/mpeg">
         </audio>
     """
     components.html(flush_sound_html, height=0)
@@ -44,13 +41,11 @@ def run():
     </style>
     """, unsafe_allow_html=True)
 
-    # Initialize session state
     if "flushed" not in st.session_state:
         st.session_state["flushed"] = False
         st.session_state["celebrated"] = False
         st.session_state["feeling"] = ""
 
-    # Input stage
     if not (st.session_state["flushed"] or st.session_state["celebrated"]):
         feeling = st.text_input("😞 Type what you're feeling:")
 
@@ -59,37 +54,29 @@ def run():
             st.markdown(f'<div class="feeling-box">💭 "{feeling}"</div>', unsafe_allow_html=True)
 
             if is_negative(feeling):
-                st.image("https://cdn-icons-png.flaticon.com/512/5117/5117343.png", width=200, caption="Toilet 🚽")
+                st.image("toilet.png", width=300, caption="Toilet 🚽")
                 if st.button("🚽 Flush it away!"):
-                    play_flush_sound()
+                    play_flush_sound()  # 🔊 Play sound on click
                     st.session_state["flushed"] = True
-                    st.experimental_rerun()
             else:
                 if st.button("🎉 Celebrate this feeling!"):
                     st.session_state["celebrated"] = True
-                    st.experimental_rerun()
 
-    # Flushed stage
     elif st.session_state["flushed"]:
         st.success("🎉 Your negative feeling has been flushed away.")
         st.markdown(f"'{st.session_state['feeling']}' is gone. You're stronger now. 💪")
         st.balloons()
-
         if st.button("🔄 Start Again"):
             st.session_state["flushed"] = False
             st.session_state["feeling"] = ""
-            st.experimental_rerun()
 
-    # Celebrated stage
     elif st.session_state["celebrated"]:
         st.success("🌟 Let's cherish this beautiful emotion!")
         st.markdown(f"You're feeling: '{st.session_state['feeling']}' — and that's amazing! 💖")
         st.balloons()
-
         if st.button("🔄 Start Again"):
             st.session_state["celebrated"] = False
             st.session_state["feeling"] = ""
-            st.experimental_rerun()
 
 if __name__ == "__main__":
-    run()
+    run() 
