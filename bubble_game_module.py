@@ -21,3 +21,6 @@ def run():
         st.markdown("### 🌈 It's okay to feel. You're doing great. Here's a little calm for you:")
         st.image("assets/soothing.gif", width=300)
         st.balloons()
+if __name__ == "__main__":
+    run()
+        
