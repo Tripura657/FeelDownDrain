@@ -5,7 +5,7 @@
 ## 💡 Features
 
 - Users type in how they're feeling
-- Recognizes negative emotions and allows you to "flush" them down a virtual toilet with sound effects 🎶
+- Recognizes negative emotions and allows you to "flush" them down a virtual toilet 
 - Recognizes positive emotions and lets you celebrate with balloons 🎉
 - Uses animations and visuals to make emotional release playful and therapeutic
 
